@@ -1,3 +1,39 @@
+<?php
+// Inclure le fichier de configuration de la base de données
+include '../config.php';
+
+// Vérifier la méthode de la requête
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les données du formulaire
+    $dateCueillette = $_POST['dateCueillette'];
+    $cueilleur = $_POST['cueilleur'];
+    $parcelle = $_POST['parcelle'];
+    $poidsCueilli = $_POST['poidsCueilli'];
+
+    // Validation AJAX pour le poids cueilli
+    $queryPoidsRestant = "SELECT PoidsRestant FROM Parcelles WHERE ID_Parcelle = '$parcelle'";
+    $resultPoidsRestant = $conn->query($queryPoidsRestant);
+
+    if ($resultPoidsRestant->num_rows > 0) {
+        $rowPoidsRestant = $resultPoidsRestant->fetch_assoc();
+        $poidsRestant = $rowPoidsRestant['PoidsRestant'];
+
+        if ($poidsCueilli > $poidsRestant) {
+            echo "Le poids cueilli est supérieur au poids restant sur la parcelle.";
+            exit();
+        }
+    }
+    $queryInsertCueillette = "INSERT INTO Cueillettes (Date_Cueillette, ID_Cueilleur, ID_Parcelle, Poids_Cueilli)
+                              VALUES ('$dateCueillette', '$cueilleur', '$parcelle', '$poidsCueilli')";
+
+    if ($conn->query($queryInsertCueillette) === TRUE) {
+        echo "Cueillette enregistrée avec succès!";
+    } else {
+        echo "Erreur lors de l'enregistrement de la cueillette: " . $conn->error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,40 +42,39 @@
     <title>Saisie des Cueillettes</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
     <h1>Saisie des Cueillettes</h1>
 
-    <form id="saisieCueilletteForm" action="traitement_saisie_cueillette.php" method="post">
+    <form id="saisieCueilletteForm" action="saisie_cueillette.php" method="post">
         <label for="dateCueillette">Date :</label>
         <input type="date" id="dateCueillette" name="dateCueillette" required>
 
         <label for="cueilleur">Cueilleur :</label>
         <select id="cueilleur" name="cueilleur" required>
             <?php
-                // récupérer les cueilleurs depuis la base de données
-                $sqlCueilleurs = "SELECT ID_Cueilleur, Nom_Cueilleur FROM Cueilleurs";
-                $resultCueilleurs = $conn->query($sqlCueilleurs);
+            // Récupérer les cueilleurs depuis la base de données
+            $sqlCueilleurs = "SELECT ID_Cueilleur, Nom_Cueilleur FROM Cueilleurs";
+            $resultCueilleurs = $conn->query($sqlCueilleurs);
 
-                // Remplir les options de la liste déroulante "Cueilleur"
-                while ($rowCueilleur = $resultCueilleurs->fetch_assoc()) {
-                    echo "<option value='{$rowCueilleur['ID_Cueilleur']}'>{$rowCueilleur['Nom_Cueilleur']}</option>";
-                }
+            // Remplir les options de la liste déroulante "Cueilleur"
+            while ($rowCueilleur = $resultCueilleurs->fetch_assoc()) {
+                echo "<option value='{$rowCueilleur['ID_Cueilleur']}'>{$rowCueilleur['Nom_Cueilleur']}</option>";
+            }
             ?>
         </select>
 
         <label for="parcelle">Parcelle :</label>
         <select id="parcelle" name="parcelle" required>
             <?php
-                // Requête SQL pour récupérer les parcelles depuis la base de données
-                $sqlParcelles = "SELECT ID_Parcelle, Numero_Parcelle FROM Parcelles";
-                $resultParcelles = $conn->query($sqlParcelles);
+            // Récupérer les parcelles depuis la base de données
+            $sqlParcelles = "SELECT ID_Parcelle, Numero_Parcelle FROM Parcelles";
+            $resultParcelles = $conn->query($sqlParcelles);
 
-                // Remplir les options de la liste déroulante "Parcelle"
-                while ($rowParcelle = $resultParcelles->fetch_assoc()) {
-                    echo "<option value='{$rowParcelle['ID_Parcelle']}'>{$rowParcelle['Numero_Parcelle']}</option>";
-                }
+            // Remplir les options de la liste déroulante "Parcelle"
+            while ($rowParcelle = $resultParcelles->fetch_assoc()) {
+                echo "<option value='{$rowParcelle['ID_Parcelle']}'>{$rowParcelle['Numero_Parcelle']}</option>";
+            }
             ?>
         </select>
 

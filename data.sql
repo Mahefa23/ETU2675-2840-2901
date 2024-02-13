@@ -89,6 +89,9 @@ INSERT INTO Parcelles (Numero_Parcelle, Surface_Hectare, ID_Variete) VALUES
 ('P2', 3.0, 3), 
 ('P3', 1.8, 4); 
 
+INSERT INTO Parcelles (Numero_Parcelle, Surface_Hectare, ID_Variete) VALUES
+('P2', 2.6, 2);
+
 
 INSERT INTO Cueilleurs (Nom_Cueilleur, Genre, Date_Naissance) VALUES 
 ('Alice', 'F', '1990-05-15'),
