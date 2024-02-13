@@ -1,7 +1,6 @@
 <?php
-// admin/gestion_varietes.php
 include '../config.php';
-
+include '../Fonctions/fonction_gestion_variete.php';
 // Récupérez la liste des variétés depuis la base de données
 $result = $conn->query("SELECT * FROM Varietes_The");
 
@@ -9,7 +8,6 @@ $result = $conn->query("SELECT * FROM Varietes_The");
 if ($result === false) {
     die("Erreur lors de la récupération des variétés : " . $conn->error);
 }
-
 // Récupérez les variétés sous forme de tableau associatif
 $varietes = $result->fetch_all(MYSQLI_ASSOC);
 ?>

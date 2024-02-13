@@ -1,7 +1,9 @@
 <?php
-include '../config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+include '../config.php';
+include '../Fonctions/fonction_gestion_parcelle.php';
+
 
 // Récupération des données des parcelles
 $result = $conn->query("SELECT * FROM Parcelles JOIN Varietes_The ON Parcelles.ID_Variete = Varietes_The.ID_Variete");
@@ -9,7 +11,6 @@ $result = $conn->query("SELECT * FROM Parcelles JOIN Varietes_The ON Parcelles.I
 if ($result === false) {
     die("Erreur lors de la récupération des parcelles : " . $conn->error);
 }
-
 $parcelles = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 

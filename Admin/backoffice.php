@@ -16,6 +16,8 @@ if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
 <body>
     <h1>Backoffice</h1>
     <a href="gestion_varietes.php">Gestion Variétés</a><br>
-    <a href="gestion_parcelles.php">Gestion Parcelles</a>
+    <a href="gestion_parcelles.php">Gestion Parcelles</a><br>
+    <a href="gestion_cueilleur.php">Gestion Cueilleurs</a><br>
+    <a href="gestion_categorie_depense.php">Gestion de catégories de dépenses</a>
 </body>
 </html>

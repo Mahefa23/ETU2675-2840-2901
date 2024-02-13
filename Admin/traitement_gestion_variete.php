@@ -1,6 +1,7 @@
 <?php
-// gestion_varietes_handler.php
 include '../config.php';
+include '../Fonctions/fonctions_gestion_variete.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['ajouter_variete'])){

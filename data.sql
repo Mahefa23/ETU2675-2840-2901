@@ -24,14 +24,14 @@ CREATE TABLE Parcelles (
 );
 
 CREATE TABLE Cueilleurs (
-    ID_Cueilleur INT PRIMARY KEY,
+    ID_Cueilleur INT AUTO_INCREMENT PRIMARY KEY,
     Nom_Cueilleur VARCHAR(255),
     Genre CHAR(1),
     Date_Naissance DATE
 );
 
 CREATE TABLE Categories_Depenses (
-    ID_Categorie INT PRIMARY KEY,
+    ID_Categorie INT AUTO_INCREMENT PRIMARY KEY,
     Nom_Categorie VARCHAR(255)
 );
 
@@ -77,3 +77,15 @@ INSERT INTO Parcelles (Numero_Parcelle, Surface_Hectare, ID_Variete) VALUES
 ('P3', 1.8, 4); 
 
 
+INSERT INTO Cueilleurs (Nom_Cueilleur, Genre, Date_Naissance) VALUES 
+('Alice', 'F', '1990-05-15'),
+('Bob', 'M', '1985-11-22'),
+('Charlie', 'M', '1992-07-08'),
+('Diana', 'F', '1980-03-12');
+
+INSERT INTO Categories_Depenses (Nom_Categorie) VALUES
+('Engrais'),
+('Carburant'),
+('Logistique'),
+('Semences'),
+('Entretien');
