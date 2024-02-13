@@ -14,6 +14,11 @@ CREATE TABLE Admins (
     Username VARCHAR(50),
     MDP VARCHAR(150)
 );
+CREATE TABLE Users (
+    ID_Users INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50),
+    MDP VARCHAR(150)
+);
 
 CREATE TABLE Parcelles (
     ID_Parcelle INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,8 +45,14 @@ CREATE TABLE Configuration_Salaire (
     Montant_Salaire_Kg DECIMAL(5,2)
 );
 
+CREATE TABLE ConfigurationSalaire (
+    ID_Configuration INT AUTO_INCREMENT PRIMARY KEY,
+    Montant_Salaire DECIMAL(10, 2) NOT NULL
+);
+
+
 CREATE TABLE Cueillettes (
-    ID_Cueillette INT PRIMARY KEY,
+    ID_Cueillette INT AUTO_INCREMENT PRIMARY KEY,
     Date_Cueillette DATE,
     Poids_Cueilli DECIMAL(5,2),
     ID_Cueilleur INT,
@@ -69,6 +80,8 @@ INSERT INTO Varietes_The (Nom_Variete, Occupation_Pied, Rendement_Pied_Mois) VAL
 
 INSERT INTO Admins (ID_Admins,Username, MDP) VALUES
 (1, "Borman", 0000);
+INSERT INTO Users (ID_Users,Username, MDP) VALUES
+(1, "Kami", 0000);
 
 -- Insertion de données de test dans Parcelles
 INSERT INTO Parcelles (Numero_Parcelle, Surface_Hectare, ID_Variete) VALUES

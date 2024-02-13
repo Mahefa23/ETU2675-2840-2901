@@ -18,6 +18,7 @@ if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
     <a href="gestion_varietes.php">Gestion Variétés</a><br>
     <a href="gestion_parcelles.php">Gestion Parcelles</a><br>
     <a href="gestion_cueilleur.php">Gestion Cueilleurs</a><br>
-    <a href="gestion_categorie_depense.php">Gestion de catégories de dépenses</a>
+    <a href="gestion_categorie_depense.php">Gestion de catégories de dépenses</a><br>
+    <a href="config_salaire.php">Configuration montant salaire par kg des Cueilleurs</a>
 </body>
 </html>

@@ -9,5 +9,6 @@
 <body>
     <h1>Bienvenue sur votre application de gestion de thé</h1>
     <p><a href="admin/login_admin.php">Accéder au Backoffice</a></p>
+    <p><a href="Users/login_users.php">Accéder au Frontoffice</a></p>
 </body>
 </html>
